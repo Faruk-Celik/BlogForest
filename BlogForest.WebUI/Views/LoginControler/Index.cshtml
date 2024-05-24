@@ -1,0 +1,18 @@
+﻿@model CreateLoginDto
+@{
+    Layout = null;
+}
+
+<div class="container">
+    <br />
+    <form method="post">
+        <label>Username</label>
+            
+        <input type="text" asp-for="UserName" class="form-control" />
+        <br /><label>Password</label>
+            
+        <input type="text" asp-for="Password" class="form-control" />
+        <button class="btn btn-dark">Log in</button>
+        <br />
+    </form>
+</div>
