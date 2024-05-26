@@ -5,23 +5,24 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlogForest.WebUI.Controllers
 {
-    public class LoginControler : Controller
+    public class LoginController : Controller
     {
         private readonly SignInManager<AppUser> _signInManager;
 
-        public LoginControler ( SignInManager<AppUser> signInManager )
+        public LoginController ( SignInManager<AppUser> signInManager )
         {
-            this._signInManager = signInManager;
+            _signInManager = signInManager;
         }
+
         [HttpGet]
         public IActionResult Index ()
         {
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Index(CreateLoginDto createLoginDto )
+        public async Task<IActionResult> Index ( CreateLoginDto createLoginDto )
         {
-            var result = await _signInManager.PasswordSignInAsync(createLoginDto.UserName, createLoginDto.Password,  false,false);
+            var result = await _signInManager.PasswordSignInAsync(createLoginDto.UserName, createLoginDto.Password, false, false);
             if (result.Succeeded)
             {
                 return RedirectToAction("Index", "Profile");
