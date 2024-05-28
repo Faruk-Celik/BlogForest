@@ -15,8 +15,6 @@ namespace BlogForest.WebUI.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
         }
-
-
         public IActionResult RoleList ()
         {
             var value = _roleManager.Roles.ToList();
@@ -49,21 +47,24 @@ namespace BlogForest.WebUI.Controllers
 
         }
         [HttpGet]
-        public async Task<IActionResult> UpdateRole ( int id )
+        public IActionResult UpdateRole ( int id )
         {
             var value = _roleManager.Roles.FirstOrDefault(x => x.Id == id);
-            return View(value);
+            UpdateRoleViewModel updateRoleViewModel = new UpdateRoleViewModel
+            {
+                RoleId = value.Id,
+                RoleName = value.Name
+            };
+            return View(updateRoleViewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateRole ( UpdateViewModel updateViewModel )
+        public async Task<IActionResult> UpdateRole ( UpdateRoleViewModel updateViewModel )
         {
-            var value = _roleManager.Roles.FirstOrDefault(x => x.Id == updateViewModel.Id);
-            value.Name = updateViewModel.Name;
+            var value = _roleManager.Roles.FirstOrDefault(x => x.Id == updateViewModel.RoleId);
+            value.Name = updateViewModel.RoleName;
             await _roleManager.UpdateAsync(value);
             return RedirectToAction("RoleList");
         }
-
-
     }
 }
 
