@@ -1,4 +1,4 @@
-﻿namespace BlogForest.WebUI.Areas.User.Models
+﻿namespace BlogForest.WebUI.Models
 {
     public class UpdateRoleViewModel
     {
